@@ -1,6 +1,9 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -101,7 +104,7 @@ public class Util {
                                     int hStart, int hEnd,
                                     Color color) {
     if (hStart < 0 || wStart < 0
-        || hEnd > bufferedImage.getHeight() || wEnd > bufferedImage.getWidth()) {
+            || hEnd > bufferedImage.getHeight() || wEnd > bufferedImage.getWidth()) {
       throw new IllegalArgumentException("Wrong picture size");
     }
 
@@ -171,6 +174,98 @@ public class Util {
     }
 
     return bufferedImage;
+  }
+
+  public static BufferedImage dithering(BufferedImage bufferedImage) {
+    for (int i = 0; i < bufferedImage.getHeight(); i++) {
+      for (int j = 0; j < bufferedImage.getWidth(); j++) {
+        int oldC = new Color(bufferedImage.getRGB(i, j)).getRed();
+
+        int newC = oldC > 255 - oldC ? 255 : 0;
+
+        Color newColor = new Color(newC, newC, newC);
+        int error = oldC - newC;
+        bufferedImage.setRGB(i, j, newColor.getRGB());
+        traverseColor(bufferedImage, 7.0 / 16, error, i, j + 1);
+        traverseColor(bufferedImage, 3.0 / 16, error, i + 1, j - 1);
+        traverseColor(bufferedImage, 5.0 / 16, error, i + 1, j);
+        traverseColor(bufferedImage, 1.0 / 16, error, i + 1, j + 1);
+      }
+    }
+    return bufferedImage;
+  }
+
+  public static Color colorAdd(double coef, int err, Color c) {
+    int newC = (int) (coef * err + c.getRed());
+    newC = Math.min(newC, 255);
+    newC = Math.max(newC, 0);
+    return new Color(newC, newC, newC);
+  }
+
+  public static BufferedImage mosaicing(BufferedImage bufferedImage, int seedNum) {
+    int[][] seeds = new int[seedNum][2];
+    Random random = new Random();
+    for (int i = 0; i < seedNum; i++) {
+      int[] seed = new int[]{random.nextInt(bufferedImage.getWidth()), random.nextInt(bufferedImage.getHeight())};
+      seeds[i] = seed;
+    }
+    int[][] pixelToSeed = new int[bufferedImage.getWidth()][bufferedImage.getHeight()];
+    // Find the nearest seed for each pixel.
+    for (int i = 0; i < bufferedImage.getWidth(); i++) {
+      for (int j = 0; j < bufferedImage.getHeight(); j++) {
+        // Traverse all the seeds, and find the nearest one.
+        double minDist = Double.MAX_VALUE;
+        for (int k = 0; k < seedNum; k++) {
+          double curDist = n2Distance(new int[]{i, j}, seeds[k]);
+          if (curDist < minDist) {
+            minDist = curDist;
+            pixelToSeed[i][j] = k;
+          }
+        }
+      }
+    }
+    // each seed -> corresponding pixels
+    List<int[]>[] seedToPixels = new ArrayList[seedNum];
+    for (int i = 0; i < seedNum; i++) {
+      seedToPixels[i] = new ArrayList<int[]>();
+    }
+    for (int i = 0; i < bufferedImage.getWidth(); i++) {
+      for (int j = 0; j < bufferedImage.getHeight(); j++) {
+        int id = pixelToSeed[i][j];
+        seedToPixels[id].add(new int[]{i, j});
+      }
+    }
+
+    // The average color of each seed.
+    double[][] seedColor = new double[seedNum][3];
+    // Traverse each seed.
+    for (int i = 0; i < seedNum; i++) {
+      int num = seedToPixels[i].size(); // the number of pixels that belong to the current seed
+      for (int j = 0; j < num; j++) {
+        Color curColor = new Color(bufferedImage.getRGB(seedToPixels[i].get(j)[0], seedToPixels[i].get(j)[1]));
+        seedColor[i][0] += curColor.getRed() / (num + 0.0);
+        seedColor[i][1] += curColor.getGreen() / (num + 0.0);
+        seedColor[i][2] += curColor.getBlue() / (num + 0.0);
+      }
+      for (int j = 0; j < num; j++) {
+        Color color = new Color((int)seedColor[i][0], (int)seedColor[i][1], (int)seedColor[i][2]);
+        int[] pos = seedToPixels[i].get(j);
+        bufferedImage.setRGB(pos[0], pos[1], color.getRGB());
+      }
+    }
+    return bufferedImage;
+  }
+
+  private static double n2Distance(int[] p1, int[] p2) {
+    return (p1[0] - p2[0]) * (p1[0] - p2[0]) + (p1[1] - p2[1]) * (p1[1] - p2[1]);
+  }
+
+  public static void traverseColor(BufferedImage bufferedImage, double coef, int error, int X, int Y) {
+    if (X >= 0 && X < bufferedImage.getWidth() && Y >= 0 && Y < bufferedImage.getHeight()) {
+      Color color = new Color(bufferedImage.getRGB(X, Y));
+      Color newColor = colorAdd(coef, error, color);
+      bufferedImage.setRGB(X, Y, newColor.getRGB());
+    }
   }
 
 }

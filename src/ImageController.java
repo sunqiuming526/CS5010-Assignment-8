@@ -79,6 +79,15 @@ public class ImageController {
     model.setBufferedImage(Util.drawCheckerboard(len, n));
   }
 
+  public void dither(){
+    makeGrey();
+    model.setBufferedImage(Util.dithering(previousModel.getBufferedImage()));
+  }
+
+  public void mosaic(int seedNum){
+    model.setBufferedImage(Util.mosaicing(previousModel.getBufferedImage(), seedNum));
+  }
+
   //output
   public void output(String outputPath, String format) throws Exception {
     Util.output(outputPath, format, this.model.getBufferedImage());
