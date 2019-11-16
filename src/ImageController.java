@@ -17,7 +17,6 @@ public class ImageController {
   private ImageModel originalModel;
   private ImageModel previousModel;
 
-  private ImageView view;
 
   public ImageController(ImageModel imageModel) {
     this.model = imageModel;
