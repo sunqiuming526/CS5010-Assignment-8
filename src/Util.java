@@ -15,11 +15,11 @@ import javax.imageio.ImageIO;
  **/
 
 public class Util {
-  public static final int HORIZONTAL = 0;
-  public static final int VERTICAL = 1;
+  private static final int HORIZONTAL = 0;
+  private static final int VERTICAL = 1;
 
 
-  public static void output(String outputPath, String format, BufferedImage bufferedImage) throws Exception {
+  private static void output(String outputPath, String format, BufferedImage bufferedImage) throws Exception {
     File f = new File(outputPath);
     ImageIO.write(bufferedImage, format, f);
   }
@@ -35,7 +35,8 @@ public class Util {
     return bufferedImage;
   }
 
-  public static BufferedImage manipulateMatrix(double[][] transferMatrix, BufferedImage bufferedImage) {
+  private static BufferedImage manipulateMatrix(double[][] transferMatrix,
+                                            BufferedImage bufferedImage) {
 
     int width = bufferedImage.getWidth();
     int height = bufferedImage.getHeight();
@@ -69,7 +70,7 @@ public class Util {
   }
 
   // 3 * 3
-  public static int[] matrix(double[][] transMatrix, int[] rgbMatrix) {
+  private static int[] matrix(double[][] transMatrix, int[] rgbMatrix) {
     int[] res = new int[3];
 
     for (int i = 0; i < 3; i++) {
@@ -83,7 +84,7 @@ public class Util {
     return res;
   }
 
-  public static BufferedImage generateBufferedImage(int width, int height, Color color) {
+  private static BufferedImage generateBufferedImage(int width, int height, Color color) {
     if (height < 0 || width < 0) {
       throw new IllegalArgumentException("Wrong picture size");
     }
@@ -99,7 +100,7 @@ public class Util {
     return bufferedImage;
   }
 
-  public static void generateStripe(BufferedImage bufferedImage,
+  private static void generateStripe(BufferedImage bufferedImage,
                                     int wStart, int wEnd,
                                     int hStart, int hEnd,
                                     Color color) {
@@ -195,7 +196,7 @@ public class Util {
     return bufferedImage;
   }
 
-  public static Color colorAdd(double coef, int err, Color c) {
+  private static Color colorAdd(double coef, int err, Color c) {
     int newC = (int) (coef * err + c.getRed());
     newC = Math.min(newC, 255);
     newC = Math.max(newC, 0);
@@ -260,7 +261,8 @@ public class Util {
     return (p1[0] - p2[0]) * (p1[0] - p2[0]) + (p1[1] - p2[1]) * (p1[1] - p2[1]);
   }
 
-  public static void traverseColor(BufferedImage bufferedImage, double coef, int error, int X, int Y) {
+  private static void traverseColor(BufferedImage bufferedImage, double coef, int error, int X,
+                                 int Y) {
     if (X >= 0 && X < bufferedImage.getWidth() && Y >= 0 && Y < bufferedImage.getHeight()) {
       Color color = new Color(bufferedImage.getRGB(X, Y));
       Color newColor = colorAdd(coef, error, color);

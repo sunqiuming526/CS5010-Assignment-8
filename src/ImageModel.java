@@ -13,13 +13,9 @@ import javax.imageio.ImageIO;
 public class ImageModel {
   //BufferImage rgb
   private BufferedImage bufferedImage;
-  private String path;
-
 
   public ImageModel(String path) {
-    this.path = path;
-    BufferedImage bufferedImage = Util.readFromFile(path);
-    this.bufferedImage = bufferedImage;
+    this.bufferedImage = Util.readFromFile(path);
   }
   public ImageModel(){
 

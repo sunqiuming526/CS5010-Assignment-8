@@ -7,7 +7,7 @@
  **/
 public class MakeGreyScaleCommand implements Command {
 
-  ImageModel imageModel;
+  private ImageModel imageModel;
 
   public MakeGreyScaleCommand(ImageModel imageModel) {
     this.imageModel = imageModel;

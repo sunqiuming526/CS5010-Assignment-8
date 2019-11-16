@@ -7,7 +7,7 @@
  **/
 public class MakeSepiaCommand implements Command {
 
-  ImageModel imageModel;
+  private ImageModel imageModel;
 
   public MakeSepiaCommand(ImageModel imageModel) {
     this.imageModel = imageModel;

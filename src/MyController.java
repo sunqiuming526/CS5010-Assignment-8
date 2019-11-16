@@ -26,11 +26,6 @@ public class MyController {
 
   public void executeCommand(String commandName) throws Exception {
 
-//    ???
-//    if(commandName.equals("load")){
-//
-//    }
-
     if(commandMap.containsKey(commandName)) {
       commandMap.get(commandName).execute();
       commandHistory.add(commandName);
