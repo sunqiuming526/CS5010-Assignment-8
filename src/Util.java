@@ -280,7 +280,6 @@ public class Util {
     transferMatrix[2][1] = 0.7152;
     transferMatrix[2][2] = 0.0722;
     model.setBufferedImage(Util.manipulateMatrix(transferMatrix, model.getBufferedImage()));
-    output("test\\grey.png","png",model.getBufferedImage());
   }
 
   //Sepia
@@ -296,10 +295,10 @@ public class Util {
     transferMatrix[2][1] = 0.534;
     transferMatrix[2][2] = 0.131;
     model.setBufferedImage(Util.manipulateMatrix(transferMatrix, model.getBufferedImage()));
-    output("test\\sepia.png","png",model.getBufferedImage());
   }
 
-  public static void saveImage(String filePath,String format,ImageModel imageModel) throws Exception {
+
+  public static void saveImage(String filePath, String format, ImageModel imageModel) throws Exception {
     output(filePath,format,imageModel.getBufferedImage());
   }
 }

@@ -6,7 +6,7 @@
  * @author: Qiuming Sun + Nan Sun
  * @create: 2019-11-15 21:02
  **/
-public class LoadCommand implements Command{
+public class LoadCommand implements Command2{
 
   ImageModel imageModel;
 
@@ -15,12 +15,14 @@ public class LoadCommand implements Command{
   }
 
   @Override
-  public void execute() throws Exception {
-
+  public ImageModel execute() {
+    return this.imageModel;
   }
 
   @Override
-  public void undo() {
-
+  public ImageModel undo()
+  {
+    return null;
   }
+
 }
