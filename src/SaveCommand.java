@@ -6,7 +6,7 @@
  * @author: Qiuming Sun + Nan Sun
  * @create: 2019-11-15 21:03
  **/
-public class SaveCommand implements Command2 {
+public class SaveCommand implements Command {
 
   private String filePath;
   private String format;
@@ -19,13 +19,12 @@ public class SaveCommand implements Command2 {
   }
 
   @Override
-  public ImageModel execute() throws Exception {
+  public void execute() throws Exception {
    Util.saveImage(filePath,format,imageModel);
-   return imageModel;
   }
 
   @Override
-  public ImageModel undo() {
-    return null;
+  public void undo() {
+    return ;
   }
 }

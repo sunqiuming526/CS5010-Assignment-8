@@ -6,23 +6,22 @@
  * @author: Qiuming Sun + Nan Sun
  * @create: 2019-11-15 21:02
  **/
-public class LoadCommand implements Command2{
+public class LoadCommand implements Command{
 
-  ImageModel imageModel;
-
-  public LoadCommand(String filePath) {
-    this.imageModel = new ImageModel(filePath);
+  public LoadCommand(String filePath,ImageModel imageModel) {
+    ImageModel i = new ImageModel(filePath);
+    imageModel.setBufferedImage(i.getBufferedImage());
   }
 
   @Override
-  public ImageModel execute() {
-    return this.imageModel;
+  public void execute() {
+    return;
   }
 
   @Override
-  public ImageModel undo()
+  public void undo()
   {
-    return null;
+    return;
   }
 
 }
