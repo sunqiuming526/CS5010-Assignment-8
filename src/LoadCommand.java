@@ -9,7 +9,7 @@
 public class LoadCommand implements Command{
 
   public LoadCommand(String filePath,ImageModel imageModel) {
-    imageModel = Util.loadImage(filePath);
+    imageModel = new ImageModel(filePath);
   }
 
   @Override
