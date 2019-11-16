@@ -299,10 +299,6 @@ public class Util {
     output("test\\sepia.png","png",model.getBufferedImage());
   }
 
-  public static ImageModel loadImage(String filePath) {
-    return new ImageModel(filePath);
-  }
-
   public static void saveImage(String filePath,String format,ImageModel imageModel) throws Exception {
     output(filePath,format,imageModel.getBufferedImage());
   }

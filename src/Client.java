@@ -10,14 +10,16 @@ public class Client {
 
   public static void main(String[] args) throws Exception {
     String filePath = "test\\image.jpg";
-    ImageModel imageModel = new ImageModel(filePath);
+    ImageModel imageModel = null;
 
-    MakeGreyScaleCommand makeGreyScaleCommand = new MakeGreyScaleCommand(imageModel);
-
+    LoadCommand loadCommand = new LoadCommand(filePath,imageModel);
     MyController myController = new MyController();
 
-    myController.setCommand("makeGrey",makeGreyScaleCommand);
+    myController.setCommand("load",loadCommand);
+    myController.executeCommand("load");
 
+    MakeGreyScaleCommand makeGreyScaleCommand = new MakeGreyScaleCommand(imageModel);
+    myController.setCommand("makeGrey",makeGreyScaleCommand);
     myController.executeCommand("makeGrey");
 
   }
