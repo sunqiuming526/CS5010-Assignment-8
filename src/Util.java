@@ -268,4 +268,18 @@ public class Util {
     }
   }
 
+  public static void makeGrey(ImageModel model) throws Exception {
+    double[][] transferMatrix = new double[3][3];
+    transferMatrix[0][0] = 0.2126;
+    transferMatrix[0][1] = 0.7152;
+    transferMatrix[0][2] = 0.0722;
+    transferMatrix[1][0] = 0.2126;
+    transferMatrix[1][1] = 0.7152;
+    transferMatrix[1][2] = 0.0722;
+    transferMatrix[2][0] = 0.2126;
+    transferMatrix[2][1] = 0.7152;
+    transferMatrix[2][2] = 0.0722;
+    model.setBufferedImage(Util.manipulateMatrix(transferMatrix, model.getBufferedImage()));
+    output("test\\res1.png","png",model.getBufferedImage());
+  }
 }

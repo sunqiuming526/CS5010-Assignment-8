@@ -12,6 +12,8 @@ public class Demo {
 
   public static void main(String[] args) throws Exception {
 
+
+
     String filePath = "test\\image.jpg";
     ImageModel imageModel = new ImageModel(filePath);
     ImageController imageController = new ImageController(imageModel);
