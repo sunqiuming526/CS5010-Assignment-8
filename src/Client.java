@@ -11,9 +11,9 @@ public class Client {
   public static void main(String[] args) throws Exception {
     String filePath = "test\\image.jpg";
     ImageModel imageModel = null;
-
-    LoadCommand loadCommand = new LoadCommand(filePath,imageModel);
     MyController myController = new MyController();
+
+    LoadCommand loadCommand = new LoadCommand(filePath);
 
     myController.setCommand("load",loadCommand);
     myController.executeCommand("load");
