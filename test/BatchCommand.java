@@ -1,6 +1,4 @@
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class BatchCommand {
@@ -42,28 +40,33 @@ public class BatchCommand {
         myController.executeCommand("load");
         break;
       case "save":
+        Util.checkImageModelNull(imageModel); // if imageModel is null, raise an error
         filePath = paras[1];
         SaveCommand saveCommand = new SaveCommand(filePath, "png", imageModel);
         myController.setCommand("save", saveCommand);
         myController.executeCommand("save");
         break;
       case "dither":
+        Util.checkImageModelNull(imageModel);
         MakeDitherCommand makeDitherCommand = new MakeDitherCommand(imageModel);
         myController.setCommand("dither", makeDitherCommand);
         myController.executeCommand("dither");
         break;
       case "mosaic":
+        Util.checkImageModelNull(imageModel);
         int seedNum = Integer.parseInt(paras[1]);
         MakeMosaicCommand makeMosaicCommand = new MakeMosaicCommand(imageModel, seedNum);
         myController.setCommand("mosaic", makeMosaicCommand);
         myController.executeCommand("mosaic");
         break;
       case "grey":
+        Util.checkImageModelNull(imageModel);
         MakeGreyScaleCommand makeGreyScaleCommand = new MakeGreyScaleCommand(imageModel);
         myController.setCommand("makeGrey", makeGreyScaleCommand);
         myController.executeCommand("makeGrey");
         break;
       case "sepia":
+        Util.checkImageModelNull(imageModel);
         MakeSepiaCommand makeSepiaCommand = new MakeSepiaCommand(imageModel);
         myController.setCommand("makeSepia", makeSepiaCommand);
         myController.executeCommand("makeSepia");
@@ -73,4 +76,6 @@ public class BatchCommand {
     }
 
   }
+
+
 }

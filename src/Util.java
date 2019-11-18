@@ -251,7 +251,7 @@ public class Util {
         seedColor[i][2] += curColor.getBlue() / (num + 0.0);
       }
       for (int j = 0; j < num; j++) {
-        Color color = new Color((int)seedColor[i][0], (int)seedColor[i][1], (int)seedColor[i][2]);
+        Color color = new Color((int) seedColor[i][0], (int) seedColor[i][1], (int) seedColor[i][2]);
         int[] pos = seedToPixels[i].get(j);
         bufferedImage.setRGB(pos[0], pos[1], color.getRGB());
       }
@@ -302,6 +302,12 @@ public class Util {
 
 
   public static void saveImage(String filePath, String format, ImageModel imageModel) throws Exception {
-    output(filePath,format,imageModel.getBufferedImage());
+    output(filePath, format, imageModel.getBufferedImage());
+  }
+
+  public static void checkImageModelNull(ImageModel imageModel) throws Exception {
+    if (imageModel.getBufferedImage() == null) {
+      throw new Exception("Must load an image first");
+    }
   }
 }
