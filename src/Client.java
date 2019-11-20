@@ -15,17 +15,45 @@ public class Client {
 
     MyController myController = new MyController();
 
-    LoadCommand loadCommand = new LoadCommand(filePath,imageModel);
-    myController.setCommand("load",loadCommand);
+    LoadCommand loadCommand = new LoadCommand(filePath, imageModel);
+    myController.setCommand("load", loadCommand);
     myController.executeCommand("load");
 
     MakeGreyScaleCommand makeGreyScaleCommand = new MakeGreyScaleCommand(imageModel);
-    myController.setCommand("makeGrey",makeGreyScaleCommand);
+    myController.setCommand("makeGrey", makeGreyScaleCommand);
     myController.executeCommand("makeGrey");
 
-    SaveCommand saveCommand = new SaveCommand("test\\output.png","png",imageModel);
-    myController.setCommand("save",saveCommand);
+    SaveCommand saveCommand = new SaveCommand("test\\output.png", "png", imageModel);
+    myController.setCommand("save", saveCommand);
     myController.executeCommand("save");
+
+    // =======================================================================
+    loadCommand = new LoadCommand(filePath, imageModel);
+    myController.setCommand("load", loadCommand);
+    myController.executeCommand("load");
+
+    MakeDitherCommand makeDitherCommand = new MakeDitherCommand(imageModel);
+    myController.setCommand("dither", makeDitherCommand);
+    myController.executeCommand("dither");
+
+    saveCommand = new SaveCommand("test\\dither.png", "png", imageModel);
+    myController.setCommand("save", saveCommand);
+    myController.executeCommand("save");
+
+    // =======================================================================
+    loadCommand = new LoadCommand(filePath, imageModel);
+    myController.setCommand("load", loadCommand);
+    myController.executeCommand("load");
+
+    int seedNum = 5000;
+    MakeMosaicCommand makeMosaicCommand = new MakeMosaicCommand(imageModel, seedNum);
+    myController.setCommand("mosaic", makeMosaicCommand);
+    myController.executeCommand("mosaic");
+
+    saveCommand = new SaveCommand("test\\mosaic.png", "png", imageModel);
+    myController.setCommand("save", saveCommand);
+    myController.executeCommand("save");
+
   }
 
 

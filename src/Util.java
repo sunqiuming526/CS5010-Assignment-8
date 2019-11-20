@@ -177,7 +177,9 @@ public class Util {
     return bufferedImage;
   }
 
-  public static BufferedImage dithering(BufferedImage bufferedImage) {
+  public static void dithering(ImageModel imageModel) throws Exception {
+    makeGrey(imageModel);
+    BufferedImage bufferedImage = imageModel.getBufferedImage();
     for (int i = 0; i < bufferedImage.getHeight(); i++) {
       for (int j = 0; j < bufferedImage.getWidth(); j++) {
         int oldC = new Color(bufferedImage.getRGB(i, j)).getRed();
@@ -193,7 +195,7 @@ public class Util {
         traverseColor(bufferedImage, 1.0 / 16, error, i + 1, j + 1);
       }
     }
-    return bufferedImage;
+    imageModel.setBufferedImage(bufferedImage);
   }
 
   private static Color colorAdd(double coef, int err, Color c) {
@@ -203,7 +205,8 @@ public class Util {
     return new Color(newC, newC, newC);
   }
 
-  public static BufferedImage mosaicing(BufferedImage bufferedImage, int seedNum) {
+  public static void mosaicing(ImageModel imageModel, int seedNum) {
+    BufferedImage bufferedImage = imageModel.getBufferedImage();
     int[][] seeds = new int[seedNum][2];
     Random random = new Random();
     for (int i = 0; i < seedNum; i++) {
@@ -249,12 +252,12 @@ public class Util {
         seedColor[i][2] += curColor.getBlue() / (num + 0.0);
       }
       for (int j = 0; j < num; j++) {
-        Color color = new Color((int)seedColor[i][0], (int)seedColor[i][1], (int)seedColor[i][2]);
+        Color color = new Color((int) seedColor[i][0], (int) seedColor[i][1], (int) seedColor[i][2]);
         int[] pos = seedToPixels[i].get(j);
         bufferedImage.setRGB(pos[0], pos[1], color.getRGB());
       }
     }
-    return bufferedImage;
+    imageModel.setBufferedImage(bufferedImage);
   }
 
   private static double n2Distance(int[] p1, int[] p2) {
@@ -301,6 +304,12 @@ public class Util {
 
 
   public static void saveImage(String filePath, String format, ImageModel imageModel) throws Exception {
-    output(filePath,format,imageModel.getBufferedImage());
+    output(filePath, format, imageModel.getBufferedImage());
+  }
+
+  public static void checkImageModelNull(ImageModel imageModel) throws Exception {
+    if (imageModel.getBufferedImage() == null) {
+      throw new Exception("Must load an image first");
+    }
   }
 }
