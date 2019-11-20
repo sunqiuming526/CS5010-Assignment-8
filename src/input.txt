@@ -1,0 +1,8 @@
+load test\\image.jpg
+dither
+save image-dither.png
+load test\\image.jpg
+mosaic 5000
+save image-mosaic.png
+sepia
+save image-mosaic-sepia.png

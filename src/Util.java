@@ -180,8 +180,8 @@ public class Util {
   public static void dithering(ImageModel imageModel) throws Exception {
     makeGrey(imageModel);
     BufferedImage bufferedImage = imageModel.getBufferedImage();
-    for (int i = 0; i < bufferedImage.getHeight(); i++) {
-      for (int j = 0; j < bufferedImage.getWidth(); j++) {
+    for (int j = 0; j < bufferedImage.getHeight(); j++) {
+      for (int i = 0; i < bufferedImage.getWidth(); i++) {
         int oldC = new Color(bufferedImage.getRGB(i, j)).getRed();
 
         int newC = oldC > 255 - oldC ? 255 : 0;
