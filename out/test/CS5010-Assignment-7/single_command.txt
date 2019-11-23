@@ -1,0 +1,3 @@
+load test\\image.jpg
+sepia
+save test\\image-sepia.png

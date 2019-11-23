@@ -1,13 +1,15 @@
 
 /**
+ * Class for MakeSepiaCommand.
+ *
  * @program: CS5010-Assignment-8
- * @description:
+ * @description: Class for MakeSepiaCommand
  * @author: Qiuming Sun + Nan Sun
  * @create: 2019-11-15 20:59
  **/
 public class MakeSepiaCommand implements Command {
 
-  ImageModel imageModel;
+  private ImageModel imageModel;
 
   public MakeSepiaCommand(ImageModel imageModel) {
     this.imageModel = imageModel;
@@ -21,7 +23,6 @@ public class MakeSepiaCommand implements Command {
 
   @Override
   public void undo() {
-    //do nothing temporarily
-
+    return;
   }
 }

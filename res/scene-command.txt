@@ -1,0 +1,12 @@
+load scene.jpg
+dither
+save scene-dither.png
+load scene.jpg
+mosaic 5000
+save scene-mosaic.png
+load scene.jpg
+sepia
+save scene-sepia.png
+load scene.jpg
+grey
+save scene-grey.png

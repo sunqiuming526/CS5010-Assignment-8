@@ -1,14 +1,14 @@
-
-
 /**
+ * Class for LoadCommand.
+ *
  * @program: CS5010-Assignment-8
- * @description:
+ * @description: Class for LoadCommand
  * @author: Qiuming Sun + Nan Sun
  * @create: 2019-11-15 21:02
  **/
-public class LoadCommand implements Command{
+public class LoadCommand implements Command {
 
-  public LoadCommand(String filePath,ImageModel imageModel) {
+  public LoadCommand(String filePath, ImageModel imageModel) {
     ImageModel i = new ImageModel(filePath);
     imageModel.setBufferedImage(i.getBufferedImage());
   }
@@ -19,8 +19,7 @@ public class LoadCommand implements Command{
   }
 
   @Override
-  public void undo()
-  {
+  public void undo() {
     return;
   }
 

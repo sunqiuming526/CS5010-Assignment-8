@@ -1,14 +1,21 @@
-import java.io.File;
 
 /**
+ * Client Class.
+ *
  * @program: CS5010-Assignment-8
- * @description:
+ * @description: client class
  * @author: Qiuming Sun + Nan Sun
  * @create: 2019-11-15 16:24
  **/
 
 public class Client {
 
+  /**
+   * Main function.
+   *
+   * @param args the arguments
+   * @throws Exception raise an exception when meet an error
+   */
   public static void main(String[] args) throws Exception {
     String filePath = "test\\image.jpg";
     ImageModel imageModel = new ImageModel();

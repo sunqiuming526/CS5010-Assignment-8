@@ -1,13 +1,15 @@
 
 /**
+ * Class for MakeGreyScaleCommand.
+ *
  * @program: CS5010-Assignment-8
- * @description:
+ * @description: Class for MakeGreyScaleCommand
  * @author: Qiuming Sun + Nan Sun
  * @create: 2019-11-15 16:06
  **/
 public class MakeGreyScaleCommand implements Command {
 
-  ImageModel imageModel;
+  private ImageModel imageModel;
 
   public MakeGreyScaleCommand(ImageModel imageModel) {
     this.imageModel = imageModel;
@@ -21,7 +23,6 @@ public class MakeGreyScaleCommand implements Command {
 
   @Override
   public void undo() {
-    //do nothing temporarily
-
+    return;
   }
 }

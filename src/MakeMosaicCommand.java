@@ -1,3 +1,11 @@
+/**
+ * Class for MakeMosaicCommand.
+ *
+ * @program: CS5010-Assignment-8
+ * @description: Class for MakeMosaicCommand
+ * @author: Qiuming Sun + Nan Sun
+ * @create: 2019-11-15 20:59
+ */
 public class MakeMosaicCommand implements Command {
 
   ImageModel imageModel;
@@ -15,7 +23,6 @@ public class MakeMosaicCommand implements Command {
 
   @Override
   public void undo() {
-    //do nothing temporarily
-
+    return;
   }
 }

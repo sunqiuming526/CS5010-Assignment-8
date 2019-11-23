@@ -1,0 +1,12 @@
+load portrait.jpg
+dither
+save portrait-dither.png
+load portrait.jpg
+mosaic 5000
+save portrait-mosaic.png
+load portrait.jpg
+sepia
+save portrait-sepia.png
+load portrait.jpg
+grey
+save portrait-grey.png

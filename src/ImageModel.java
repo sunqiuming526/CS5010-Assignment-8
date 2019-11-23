@@ -1,11 +1,10 @@
 import java.awt.image.BufferedImage;
-import java.io.File;
-
-import javax.imageio.ImageIO;
 
 /**
+ * Class for ImageModel.
+ *
  * @program: CS5010-Assignment-7
- * @description:
+ * @description: Class for ImageModel
  * @author: Nan Sun
  * @create: 2019-11-05 21:53
  **/
@@ -13,16 +12,13 @@ import javax.imageio.ImageIO;
 public class ImageModel {
   //BufferImage rgb
   private BufferedImage bufferedImage;
-  private String path;
-
 
   public ImageModel(String path) {
-    this.path = path;
-    BufferedImage bufferedImage = Util.readFromFile(path);
-    this.bufferedImage = bufferedImage;
+    this.bufferedImage = Util.readFromFile(path);
   }
-  public ImageModel(){
 
+  public ImageModel() {
+    // Empty Constructor: leave the bufferedImage Null.
   }
 
   public BufferedImage getBufferedImage() {
